@@ -1,0 +1,8 @@
+
+## build and run with docker container 
+
+```sh
+
+docker compose up --build
+
+```

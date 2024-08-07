@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    command: npm run start
+    environment:
+      - FRONTEND_URL=http://frontend:80
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      - NODE_ENV=production
+      - VITE_BACKEND_HOST=http://backend:3000
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
